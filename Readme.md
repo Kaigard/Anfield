@@ -27,7 +27,7 @@
 Balotelli核框图如下：
 <img src="https://github.com/Kaigard/Anfield/blob/V0.5/doc/design.png"> 
 
-Balotelli核实现了除Cache一致性指令以外的所有RISC-V 64IM指令，具体包含模块如下： 
+Balotelli核采用哈弗架构，实现了除Cache一致性指令以外的所有RISC-V 64IM指令，具体包含模块如下： 
 * 数据通路五级流水
 * 数据前推Fwu模块
 * Ctrl控制模块
