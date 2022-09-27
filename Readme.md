@@ -23,7 +23,7 @@
 > 除Balotelli核，其他外围设备均未进行完备验证。Balotelli核已通过大部分CPU-tests，中断异常模块未进行验证。  
 
 Balotelli核框图如下：
-<img src=" 1"> 
+<img src="https://github.com/Kaigard/Anfield/blob/V0.5/doc/design.png"> 
 
 Balotelli核实现了出Cache一致性指令以外的所有RISC-V 64IM指令，具体包含模块如下： 
 * 数据通路五级流水
