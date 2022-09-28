@@ -10,8 +10,10 @@
 -->
 #### Anfield SoC
 <font color=red>注意！！！  
-此项目（V0.5）正在进行，必有Bug！！！！  
-此SoC绝大部分结构为作者所想，因此有很多不合理之处！！！</font>
+此项目（V0.5）正在进行，必有Bug！！！  
+此SoC绝大部分结构为作者自己瞎琢磨，因此有很多不合理之处！！！
+想要合理正确的架构，请翻阅《CPU设计实战》及《超标量处理器设计》这两本书。
+</font>
 
 此SoC包含：
 * Balotelli RISC-V 64IM核
@@ -25,12 +27,12 @@
 Balotelli核框图如下：
 <img src="https://github.com/Kaigard/Anfield/blob/V0.5/doc/1.png"> 
 
-Balotelli核实现了出Cache一致性指令以外的所有RISC-V 64IM指令，具体包含模块如下： 
+Balotelli核采用哈弗架构，实现了除Cache一致性指令以外的所有RISC-V 64IM指令，具体包含模块如下： 
 * 数据通路五级流水
 * 数据前推Fwu模块
 * Ctrl控制模块
 * 多周期乘、除法器
-* PrePc伪寄存器
+* PrePc伪地址寄存器
 * Ifu预取指单元
 * I-Cache
 * 未经验证的AXI-lite Master接口 
@@ -46,5 +48,11 @@ Balotelli核亮点：
 > 硬连线的0周期状态：借助Cache，使得Ifu可以利用Pc地址直接取出指令，当Cache Missing时向流水线中注入气泡。
 
 Balotelli核缺点：  
+<<<<<<< HEAD
 * 访存周期浪费严重。
 * 控制模块设计不美观。
+=======
+* 未实现D-Cache，访存周期浪费严重。
+* 控制模块设计复杂混乱。
+* I-Cache采用阻塞式直接映射，周期浪费严重。
+>>>>>>> cbc73dba2fe7a59d107f3cfac188feb336427097
