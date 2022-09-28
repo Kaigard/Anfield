@@ -17,7 +17,7 @@
 
 此SoC包含：
 * Balotelli RISC-V 64IM核
-* 未经验证的VGA接口
+* 不带字库RGB三色的VGA接口
 * RAM、ROM行为级模型
 * 未经验证的AXI-lite总线接口
 * 不完整的Timer0 
