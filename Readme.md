@@ -15,6 +15,9 @@
 想要合理正确的架构，请翻阅《CPU设计实战》及《超标量处理器设计》这两本书。
 </font>
 
+log：
+9.29 VGA接口模块测试通过
+
 此SoC包含：
 * Balotelli RISC-V 64IM核
 * 不带字库RGB三色的VGA接口
