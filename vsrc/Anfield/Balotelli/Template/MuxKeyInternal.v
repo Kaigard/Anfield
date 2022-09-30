@@ -1,5 +1,12 @@
 // 选择器模板内部实现
-module MuxKeyInternal #(NR_KEY = 2, KEY_LEN = 1, DATA_LEN = 1, HAS_DEFAULT = 0) (
+module MuxKeyInternal 
+#(
+  parameter NR_KEY = 2, 
+  parameter KEY_LEN = 1, 
+  parameter DATA_LEN = 1, 
+  parameter HAS_DEFAULT = 0
+) 
+(
   output reg [DATA_LEN-1:0] out,
   input [KEY_LEN-1:0] key,
   input [DATA_LEN-1:0] default_out,
@@ -12,7 +19,8 @@ module MuxKeyInternal #(NR_KEY = 2, KEY_LEN = 1, DATA_LEN = 1, HAS_DEFAULT = 0) 
   wire [DATA_LEN-1:0] data_list [NR_KEY-1:0];
 
   generate
-    for (genvar n = 0; n < NR_KEY; n = n + 1) begin
+    genvar n;
+    for (n = 0; n < NR_KEY; n = n + 1) begin
       assign pair_list[n] = lut[PAIR_LEN*(n+1)-1 : PAIR_LEN*n];
       assign data_list[n] = pair_list[n][DATA_LEN-1:0];
       assign key_list[n]  = pair_list[n][PAIR_LEN-1:DATA_LEN];

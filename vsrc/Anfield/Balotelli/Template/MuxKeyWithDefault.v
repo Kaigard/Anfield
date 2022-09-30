@@ -1,4 +1,10 @@
-module MuxKeyWithDefault #(NR_KEY = 2, KEY_LEN = 1, DATA_LEN = 1) (
+module MuxKeyWithDefault 
+#(
+  parameter NR_KEY = 2, 
+  parameter KEY_LEN = 1, 
+  parameter DATA_LEN = 1
+) 
+(
   output [DATA_LEN-1:0] out,
   input [KEY_LEN-1:0] key,
   input [DATA_LEN-1:0] default_out,

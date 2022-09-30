@@ -2,8 +2,8 @@
  * @Author: Kai Zhou && zhouk9864@gmail.com
  * @Date: 2022-09-26 20:35:23
  * @LastEditors: Kai Zhou && zhouk9864@gmail.com
- * @LastEditTime: 2022-09-27 15:55:28
- * @FilePath: /Anfield/Balotelli/Pipeline/Ex.v
+ * @LastEditTime: 2022-09-28 10:47:09
+ * @FilePath: /Anfield_SOC/vsrc/Anfield/Balotelli/Pipeline/Ex.v
  * @Description: 执行级
  * 
  * Copyright (c) 2022 by Kai Zhou zhouk9864@gmail.com, All Rights Reserved. 
@@ -48,7 +48,7 @@ module Ex (
   // output [2:0] RV32M_Funct3ExOut,
   // output [6:0] RV32M_Funct7ExOut,
   //输出给Ex2Mem模块的信号
-  output reg [`DataBus] RdWriteDataOut,
+  output [`DataBus] RdWriteDataOut,
   output [`RegFileAddr] RdAddrOut,
   output RdWriteEnableOut,
   //Load or Store

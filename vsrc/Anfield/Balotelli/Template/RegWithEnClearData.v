@@ -1,6 +1,11 @@
 `include "./vsrc/defines.v"
 //当hold信号使能时清除当前数据
-module RegWithEnClearData #(WIDTH = 1, RESET_VAL = 0) (
+module RegWithEnClearData 
+#( 
+  parameter WIDTH = 1,
+  parameter RESET_VAL = 0
+)
+(
   input clk,
   input rst,
   input [WIDTH-1:0] din,

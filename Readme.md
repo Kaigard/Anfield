@@ -17,7 +17,9 @@
 
 Log：  
 
-9.29 VGA接口模块测试通过
+9.29 VGA接口模块测试通过 
+ 
+ 
 
 此SoC包含：
 * Balotelli RISC-V 64IM核

@@ -1,3 +1,15 @@
+/*
+ * @Author: Kai Zhou && zhouk9864@gmail.com
+ * @Date: 2022-09-27 14:47:25
+ * @LastEditors: Kai Zhou && zhouk9864@gmail.com
+ * @LastEditTime: 2022-09-28 21:02:14
+ * @FilePath: /Anfield_SOC/vsrc/defines.v
+ * @Description: 全局宏定义及运行模式选择
+ * 
+ * Copyright (c) 2022 by Kai Zhou zhouk9864@gmail.com, All Rights Reserved. 
+ */
+
+
 //Bus
 `define AddrBus 63:0
 `define DataBus 63:0
@@ -26,13 +38,13 @@
 `define MulSumZero 128'h0
 
 //Pc module
-`define PcInit 64'h80000000
+`define PcInit 64'h0000_0000_8000_0000
 
 //RegFile
 `define RegNum 32
 
 //Modechoose
-`define DebugMode 1
+ `define DebugMode 1
 `define CpuTestsMode 1
 
 //Mul

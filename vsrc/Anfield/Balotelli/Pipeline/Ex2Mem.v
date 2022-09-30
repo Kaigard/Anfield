@@ -2,13 +2,14 @@
  * @Author: Kai Zhou && zhouk9864@gmail.com
  * @Date: 2022-09-26 20:35:23
  * @LastEditors: Kai Zhou && zhouk9864@gmail.com
- * @LastEditTime: 2022-09-27 15:58:08
- * @FilePath: /Anfield/Balotelli/Pipeline/Ex2Mem.v
+ * @LastEditTime: 2022-09-28 10:02:51
+ * @FilePath: /Anfield_SOC/vsrc/Anfield/Balotelli/Pipeline/Ex2Mem.v
  * @Description: 流水阻塞级，进行流水线控制解耦，跳转及暂停均不会对该级造成影响，便于五级流水与三级流水之间进行更改。
  * 
  * Copyright (c) 2022 by Kai Zhou zhouk9864@gmail.com, All Rights Reserved. 
  */
-
+ 
+`include "./vsrc/defines.v"
 module Ex2Mem (
   input Clk,
   input Rst,

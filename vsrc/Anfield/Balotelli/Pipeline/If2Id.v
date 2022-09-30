@@ -2,14 +2,14 @@
  * @Author: Kai Zhou && zhouk9864@gmail.com
  * @Date: 2022-09-26 20:35:23
  * @LastEditors: Kai Zhou && zhouk9864@gmail.com
- * @LastEditTime: 2022-09-27 16:01:16
- * @FilePath: /Anfield/Balotelli/Pipeline/If2Id.v
+ * @LastEditTime: 2022-09-28 10:03:01
+ * @FilePath: /Anfield_SOC/vsrc/Anfield/Balotelli/Pipeline/If2Id.v
  * @Description: 流水缓冲级，从预取值来的指令及地址通过该级传入后级，当发生流水暂停时该级将锁住数据，当发生跳转时该级将引入气泡冲刷流水线。
  * 
  * Copyright (c) 2022 by Kai Zhou zhouk9864@gmail.com, All Rights Reserved. 
  */
 
-
+`include "./vsrc/defines.v"
 module If2Id (
   input Clk,
   input Rst,

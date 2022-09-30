@@ -2,13 +2,12 @@
  * @Author: Kai Zhou && zhouk9864@gmail.com
  * @Date: 2022-09-26 20:35:23
  * @LastEditors: Kai Zhou && zhouk9864@gmail.com
- * @LastEditTime: 2022-09-27 15:50:46
- * @FilePath: /Anfield/Balotelli/Balotelli.v
+ * @LastEditTime: 2022-09-28 11:13:01
+ * @FilePath: /Anfield_SOC/vsrc/Anfield/Balotelli/Balotelli.v
  * @Description: Balotelli核，实现RISC-V 64IM指令集，已过部分CPU tests，中断部分尚未进行验证。
  * 
  * Copyright (c) 2022 by Kai Zhou zhouk9864@gmail.com, All Rights Reserved. 
  */
-
 
 `include "./vsrc/defines.v"
 module Balotelli (
@@ -130,12 +129,44 @@ module Balotelli (
   wire [`InstBus] InstToIf2Id;
   wire BusUsedEnd;
 
+  wire [`DataBus] CsrReadData_IdIn;
 
   wire [`InstAddrBus] PrePcOut;
-  wire [`InstAddrBus] PcOut;
+  // wire [`InstAddrBus] PcOut;
   wire PcChange;
   wire CacheMissing;
   wire CacheFull;
+
+  wire HoldFlagFromClint;
+  wire HoldFlagEndFromClint;
+  wire [`InstAddrBus] JumpAddrFromClint;
+
+  wire [1:0] RVM_HoldFlagOut;
+  wire [`RegFileAddr] MulWriteAddrToMul;
+  wire [`RegFileAddr] MulWriteAddrToEx;
+  wire [6:0] MulOpCodeToEx;
+  wire [2:0] MulFunct3ToEx;
+  wire [6:0] MulFunct7ToEx;
+
+  wire [`DataBus] Rs1ReadDataDivRs2ReadData;
+  wire [`DataBus] Rs1ReadDataRemRs2ReadData;
+  wire DivHoldEndToEx; 
+  wire [`RegFileAddr] DivWriteAddrToEx;
+
+  wire [6:0] DivOpCodeToEx;
+  wire [2:0] DivFunct3ToEx;
+  wire [6:0] DivFunct7ToEx;
+
+  wire [6:0] Funct7_ExOut;
+
+  wire [`InstAddrBus] InstAddr_ExOut;
+
+  wire [`InstAddrBus] InstAddr_MemIn;
+  wire [`InstAddrBus] InstAddr_MemOut;
+
+  wire [`DataBus] CsrWriteData_ExOut;
+  wire CsrWriteEnable_ExOut;
+  wire [11:0] CsrWriteAddr_ExOut;
  
   Pc Balotelli_Pc (
     .Clk(Clk),
@@ -162,9 +193,6 @@ module Balotelli (
     .CacheMissing(CacheMissing),
     .CacheFull(CacheFull)
   );
-
-  wire [`InstAddrBus] InstAddrToIf2Id;
-  wire [`InstBus] InstToIf2Id;
 
   Ifu Balotelli_Ifu (
     .Clk(Clk),
@@ -281,33 +309,6 @@ module Balotelli (
     .ShamtOut(Shamt_ExIn)
   );
   
-  wire [1:0] RVM_HoldFlagOut;
-  wire [`RegFileAddr] MulWriteAddrToMul;
-  wire [`RegFileAddr] MulWriteAddrToEx;
-  wire [6:0] MulOpCodeToEx;
-  wire [2:0] MulFunct3ToEx;
-  wire [6:0] MulFunct7ToEx;
-
-  wire [`DataBus] Rs1ReadDataDivRs2ReadData;
-  wire [`DataBus] Rs1ReadDataRemRs2ReadData;
-  wire DivHoldEndToEx; 
-  wire [`RegFileAddr] DivWriteAddrToEx;
-
-  wire [6:0] DivOpCodeToEx;
-  wire [2:0] DivFunct3ToEx;
-  wire [6:0] DivFunct7ToEx;
-
-  wire [6:0] Funct7_ExOut;
-
-  wire [`InstAddrBus] InstAddr_ExOut;
-
-  wire [`InstAddrBus] InstAddr_MemIn;
-  wire [`InstAddrBus] InstAddr_MemOut;
-
-  wire [`DataBus] CsrReadData_IdIn;
-  wire [`DataBus] CsrWriteData_ExOut;
-  wire CsrWriteEnable_ExOut;
-  wire [11:0] CsrWriteAddr_ExOut;
   Ex Balotelli_Ex (
     .InstAddrIn(InstAddr_ExIn),
     .RdAddrIn(RdAddr_ExIn),
@@ -502,9 +503,6 @@ module Balotelli (
     .CsrWriteDataFwuOut(CsrReadData_FwuOut)
   );
 
-  wire HoldFlagFromClint;
-  wire HoldFlagEndFromClint;
-  wire [`InstAddrBus] JumpAddrFromClint;
   Ctrl Balotelli_Ctrl (
     .Clk(Clk),
     .Rst(Rst),

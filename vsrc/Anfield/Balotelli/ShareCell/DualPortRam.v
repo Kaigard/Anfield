@@ -2,8 +2,8 @@
  * @Author: Kai Zhou && zhouk9864@gmail.com
  * @Date: 2022-09-26 20:35:23
  * @LastEditors: Kai Zhou && zhouk9864@gmail.com
- * @LastEditTime: 2022-09-27 15:51:24
- * @FilePath: /Anfield/Balotelli/ShareCell/DualPortRam.v
+ * @LastEditTime: 2022-09-29 10:28:31
+ * @FilePath: /Anfield_SOC/vsrc/Anfield/Balotelli/ShareCell/DualPortRam.v
  * @Description: 双口Ram行为级模型。
  * 
  * Copyright (c) 2022 by Kai Zhou zhouk9864@gmail.com, All Rights Reserved. 
@@ -26,7 +26,7 @@ module DualPortRam
   input REnc
 );
 
-  reg [DataWidth - 1 : 0] RamMem [Deepth - 1: Ground];
+  reg [DataWidth - 1 : 0] RamMem [Deepth : Ground];
 
   // write
   always @(posedge WClk) begin

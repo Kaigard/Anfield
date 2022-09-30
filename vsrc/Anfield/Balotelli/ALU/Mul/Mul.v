@@ -2,8 +2,8 @@
  * @Author: Kai Zhou && zhouk9864@gmail.com
  * @Date: 2022-09-26 20:35:23
  * @LastEditors: Kai Zhou && zhouk9864@gmail.com
- * @LastEditTime: 2022-09-27 16:13:35
- * @FilePath: /Anfield/Balotelli/ALU/Mul/Mul.v
+ * @LastEditTime: 2022-09-28 10:45:21
+ * @FilePath: /Anfield_SOC/vsrc/Anfield/Balotelli/ALU/Mul/Mul.v
  * @Description: 多周期乘法器。
  * 
  * Copyright (c) 2022 by Kai Zhou zhouk9864@gmail.com, All Rights Reserved. 
@@ -24,7 +24,7 @@ module Mul(
   //输出给Ex模块的信号
   output reg [(`DataWidth * 2) - 1 : 0] ProductToEx,
   output MulHoldEndToEx,                                                    //同样也会传送给Ctrl模块
-  output reg [`RegFileAddr] MulWriteAddrToEx,
+  output [`RegFileAddr] MulWriteAddrToEx,
   output [6:0] MulOpCodeToEx,
   output [2:0] MulFunct3ToEx,
   output [6:0] MulFunct7ToEx

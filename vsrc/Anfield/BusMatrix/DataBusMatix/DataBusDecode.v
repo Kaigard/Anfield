@@ -2,8 +2,8 @@
  * @Author: Kai Zhou && zhouk9864@gmail.com
  * @Date: 2022-09-26 20:40:04
  * @LastEditors: Kai Zhou && zhouk9864@gmail.com
- * @LastEditTime: 2022-09-27 15:44:38
- * @FilePath: /Anfield/BusMatrix/DataBusDecode.v
+ * @LastEditTime: 2022-09-29 13:38:34
+ * @FilePath: /Anfield_SOC/vsrc/Anfield/BusMatrix/DataBusMatix/DataBusDecode.v
  * @Description: 数据总线矩阵Mux，因采用哈弗架构且采用阻塞方式对外读写所以并未含有仲裁功能，目前支持一主三从。
  * 
  * Copyright (c) 2022 by Kai Zhou zhouk9864@gmail.com, All Rights Reserved. 
@@ -16,25 +16,25 @@ module DataBusDecode (
   input AWVALID,
   input [`AddrBus] AWADDR,
   input [2:0] AWPROT,
-  output reg AWREADY,
+  output AWREADY,
   // write data channel
   input WVALID,
   input [`DataBus] WDATA,
   input [3:0] WSTRB,
-  output reg WREADY,
+  output WREADY,
   // write repair channel
   input BREADY,
-  output reg BVALID,
-  output reg [2:0] BRESP,
+  output BVALID,
+  output [2:0] BRESP,
   // read addr channel
   input ARVALID,
   input [`AddrBus] ARADDR,
   input [2:0] ARPROT,
   output ARREADY,
   // read data channel
-  output reg RVALID,
-  output reg [`DataBus] RDATA,
-  output reg [2:0] RRESP,
+  output RVALID,
+  output [`DataBus] RDATA,
+  output [2:0] RRESP,
   input RREADY,
   // slaver 0
   // read data channel
@@ -113,37 +113,41 @@ module DataBusDecode (
   output RREADY_S2
 );
 
+  // localparam RamBaseAddr = 64'h0000_0000_8000_0000;
+  // localparam VgaBaseAddr = 64'h0000_0000_4000_0000;
+  // localparam Timer0BaseAddr = 64'h0000_0000_5000_0000;
+
   // slaver 0
   assign AWVALID_S0 = AWADDR[31:28] == 4'h8 ? AWVALID : 1'b0;
-  assign AWADDR_S0 = AWADDR[31:28] == 4'h8 ? AWADDR : `RegZero;
-  assign AWPROT_S0 = AWADDR[31:28] == 4'h8 ? AWPROT : 3'h0;
+  assign AWADDR_S0 = AWADDR[31:28] == 4'h8 ? {36'h0, AWADDR[27:0]} : `RegZero;
+  assign AWPROT_S0 = AWADDR[31:28] == 4'h8 ? AWPROT : 3'h0; 
   assign WVALID_S0 = AWADDR[31:28] == 4'h8 ? WVALID : 1'b0;
   assign WDATA_S0 = AWADDR[31:28] == 4'h8 ? WDATA : `RegZero;
   assign WSTRB_S0 = AWADDR[31:28] == 4'h8 ? WSTRB : 4'h0;
   assign ARVALID_S0 = ARADDR[31:28] == 4'h8 ? ARVALID : 1'b0;
-  assign ARADDR_S0 = ARADDR[31:28] == 4'h8 ? ARADDR : `RegZero;
+  assign ARADDR_S0 = ARADDR[31:28] == 4'h8 ? {36'h0, ARADDR[27:0]} : `RegZero;
   assign ARPROT_S0 = ARADDR[31:28] == 4'h8 ? ARPROT : 3'h0;
 
   // slaver 1
   assign AWVALID_S1 = AWADDR[31:28] == 4'h4 ? AWVALID : 1'b0;
-  assign AWADDR_S1 = AWADDR[31:28] == 4'h4 ? AWADDR : `RegZero;
+  assign AWADDR_S1 = AWADDR[31:28] == 4'h4 ? {36'h0, AWADDR[27:0]} : `RegZero;
   assign AWPROT_S1 = AWADDR[31:28] == 4'h4 ? AWPROT : 3'h0;
   assign WVALID_S1 = AWADDR[31:28] == 4'h4 ? WVALID : 1'b0;
   assign WDATA_S1 = AWADDR[31:28] == 4'h4 ? WDATA : `RegZero;
   assign WSTRB_S1 = AWADDR[31:28] == 4'h4 ? WSTRB : 4'h0;
   assign ARVALID_S1 = ARADDR[31:28] == 4'h4 ? ARVALID : 1'b0;
-  assign ARADDR_S1 = ARADDR[31:28] == 4'h4 ? ARADDR : `RegZero;
+  assign ARADDR_S1 = ARADDR[31:28] == 4'h4 ? {36'h0, ARADDR[27:0]} : `RegZero;
   assign ARPROT_S1 = ARADDR[31:28] == 4'h4 ? ARPROT : 3'h0;
 
   // slaver 2
   assign AWVALID_S2 = AWADDR[31:28] == 4'h5 ? AWVALID : 1'b0;
-  assign AWADDR_S2 = AWADDR[31:28] == 4'h5 ? AWADDR : `RegZero;
+  assign AWADDR_S2 = AWADDR[31:28] == 4'h5 ? {36'h0, AWADDR[27:0]} : `RegZero;
   assign AWPROT_S2 = AWADDR[31:28] == 4'h5 ? AWPROT : 3'h0;
   assign WVALID_S2 = AWADDR[31:28] == 4'h5 ? WVALID : 1'b0;
   assign WDATA_S2 = AWADDR[31:28] == 4'h5 ? WDATA : `RegZero;
   assign WSTRB_S2 = AWADDR[31:28] == 4'h5 ? WSTRB : 4'h0;
   assign ARVALID_S2 = ARADDR[31:28] == 4'h5 ? ARVALID : 1'b0;
-  assign ARADDR_S2 = ARADDR[31:28] == 4'h5 ? ARADDR : `RegZero;
+  assign ARADDR_S2 = ARADDR[31:28] == 4'h5 ? {36'h0, ARADDR[27:0]} : `RegZero;
   assign ARPROT_S2 = ARADDR[31:28] == 4'h5 ? ARPROT : 3'h0;
 
   assign AWREADY = AWREADY_S0 | AWREADY_S1 | AWREADY_S2;

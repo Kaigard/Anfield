@@ -2,8 +2,8 @@
  * @Author: Kai Zhou && zhouk9864@gmail.com
  * @Date: 2022-09-26 20:35:23
  * @LastEditors: Kai Zhou && zhouk9864@gmail.com
- * @LastEditTime: 2022-09-27 15:43:29
- * @FilePath: /Anfield/Memory/Ram.v
+ * @LastEditTime: 2022-09-29 10:53:03
+ * @FilePath: /Anfield_SOC/vsrc/Anfield/Peripherals/Memory/Ram.v
  * @Description: 该模块对双口Ram进行封装，以实现64bit的双口Ram可以实现，低8bit、16bit、32bit写操作。
  * 
  * Copyright (c) 2022 by Kai Zhou zhouk9864@gmail.com, All Rights Reserved. 
@@ -19,6 +19,8 @@ module Ram (
   input [`DataBus] RamWriteData,
   input [3 : 0] RamWriteStrb,
   input [`AddrBus] RamReadAddr,
+  input ReadEnable,
+  input WriteEnable,
   // To BusMatrix
   output reg [`DataBus] RamReadData,
   output reg RamReadReady,
@@ -42,8 +44,8 @@ module Ram (
     end
   end
 
-  wire WriteEnable = (RamWriteAddr != 64'h0);
-  wire ReadEnable = (RamReadAddr != 64'h0);
+  // wire WriteEnable = (RamWriteAddr != 64'h0);
+  // wire ReadEnable = (RamReadAddr != 64'h0);
 
   localparam RamIdel = 3'b000;
   localparam RamRead = 3'b001;
@@ -199,26 +201,26 @@ module Ram (
                     RamReadReady <= 1'b0;
                   end
                   default : begin
-                    RAddr <= 'x;
-                    REnc <= 1'x;
-                    WData <= 'x;
-                    WEnc <= 1'x;
-                    WAddr <= 'x;
-                    RamWriteReady <= 1'x;
-                    RamReadData <= 'x;
-                    RamReadReady <= 1'x;
+                    RAddr <= 'b0;
+                    REnc <= 1'b0;
+                    WData <= 'b0;
+                    WEnc <= 1'b0;
+                    WAddr <= 'b0;
+                    RamWriteReady <= 1'b0;
+                    RamReadData <= 'b0;
+                    RamReadReady <= 1'b0;
                   end
                 endcase
             end
             default : begin
-              RAddr <= 'x;
-              REnc <= 1'x;
-              WData <= 'x;
-              WEnc <= 1'x;
-              WAddr <= 'x;
-              RamWriteReady <= 1'x;
-              RamReadData <= 'x;
-              RamReadReady <= 1'x;
+              RAddr <= 'b0;
+              REnc <= 1'b0;
+              WData <= 'b0;
+              WEnc <= 1'b0;
+              WAddr <= 'b0;
+              RamWriteReady <= 1'b0;
+              RamReadData <= 'b0;
+              RamReadReady <= 1'b0;
             end
             endcase   
         end
@@ -310,17 +312,17 @@ module Ram (
   end
 
   DualPortRam #(
-    .Deepth(32'h8fff_ffff),
-    .Ground(32'h8000_0000)
+    .Deepth(32'h0fff_ffff),
+    .Ground(32'h0000_0000)
   )
-  Soc_Ram (
+  Anfield_Ram (
      .WClk(ACLK),
      .WData(WData),
-     .WAddr(WAddr[31 : 0]),
+     .WAddr(WAddr[27 : 0]),
      .WEnc(WEnc),
      .RClk(ACLK),
      .RData(RData),
-     .RAddr(RAddr[31 : 0]),
+     .RAddr(RAddr[27 : 0]),
      .REnc(REnc)
   );
 

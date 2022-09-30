@@ -2,8 +2,8 @@
  * @Author: Kai Zhou && zhouk9864@gmail.com
  * @Date: 2022-09-26 20:35:23
  * @LastEditors: Kai Zhou && zhouk9864@gmail.com
- * @LastEditTime: 2022-09-27 15:53:25
- * @FilePath: /Anfield/Balotelli/ShareCell/SycnFIFO.v
+ * @LastEditTime: 2022-09-28 10:35:54
+ * @FilePath: /Anfield_SOC/vsrc/Anfield/Balotelli/ShareCell/SycnFIFO.v
  * @Description: 同步FIFO
  * 
  * Copyright (c) 2022 by Kai Zhou zhouk9864@gmail.com, All Rights Reserved. 
@@ -19,10 +19,10 @@ module SyncFIFO
   input Rst,
   input [DataWidth - 1 : 0] WData,
   input WInc,
-  output reg WFull,
+  output WFull,
   output reg [DataWidth - 1 : 0] RData,
   input RInc,
-  output reg REmpty
+  output REmpty
 );
   
   localparam DeepthBit = $clog2(Deepth);

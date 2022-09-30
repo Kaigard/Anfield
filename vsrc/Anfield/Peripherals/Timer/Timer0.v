@@ -2,8 +2,8 @@
  * @Author: Kai Zhou && zhouk9864@gmail.com
  * @Date: 2022-09-26 20:35:23
  * @LastEditors: Kai Zhou && zhouk9864@gmail.com
- * @LastEditTime: 2022-09-27 15:36:29
- * @FilePath: /Anfield/Timer/Timer0.v
+ * @LastEditTime: 2022-09-29 10:57:08
+ * @FilePath: /Anfield_SOC/vsrc/Anfield/Peripherals/Timer/Timer0.v
  * @Description: 乞丐版定时器，未来会将已有的几个低性能定时器进行集成，目前Timer0共有四个寄存器，分别为：ARR（计数上限）、SR（中断标志位）、CR1（定时器使能标志位）、CNT（计数寄存器）。
  * 
  * Copyright (c) 2022 by Kai Zhou zhouk9864@gmail.com, All Rights Reserved. 
@@ -17,6 +17,7 @@ module Timer0 (
   // From BusMatrix
   input [`DataBus] WriteAddr,
   input [`DataBus] WriteData,
+  input WriteEnable,
   input [3:0] WriteStrb,
   // To BusMatrix
   output reg SlaverWriteReady,
@@ -34,17 +35,17 @@ module Timer0 (
       Timer0_CR1 <= `RegZero;
       Timer0_ARR <= `RegZero;
       Timer0_SR <= `RegZero;
-    end else begin
+    end else if(WriteEnable) begin
       case (WriteAddr)
-        64'h5000_0000 : begin
+        64'h0000_0000 : begin
           Timer0_CR1 <= WriteData;
           SlaverWriteReady <= 1'b1;
         end
-        64'h5000_0004 : begin
+        64'h0000_0004 : begin
           Timer0_ARR <= WriteData;
           SlaverWriteReady <= 1'b1;
         end
-        64'h5000_0008 : begin
+        64'h0000_0008 : begin
           Timer0_SR <= WriteData;
           SlaverWriteReady <= 1'b1;
         end

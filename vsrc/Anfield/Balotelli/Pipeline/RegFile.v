@@ -2,8 +2,8 @@
  * @Author: Kai Zhou && zhouk9864@gmail.com
  * @Date: 2022-09-26 20:35:23
  * @LastEditors: Kai Zhou && zhouk9864@gmail.com
- * @LastEditTime: 2022-09-27 16:09:44
- * @FilePath: /Anfield/Balotelli/Pipeline/RegFile.v
+ * @LastEditTime: 2022-09-28 13:35:06
+ * @FilePath: /Anfield_SOC/vsrc/Anfield/Balotelli/Pipeline/RegFile.v
  * @Description: 寄存器堆。
  * 
  * Copyright (c) 2022 by Kai Zhou zhouk9864@gmail.com, All Rights Reserved. 
@@ -49,9 +49,43 @@ module RegFile (
   //rd同步写
   always @(posedge Clk) begin
     if(!Rst) begin
-      for (integer i = 0; i < `RegNum; i = i + 1) begin
-        rf[i] <= `RegZero;
-      end
+      // generate
+      //   for (integer i = 0; i < `RegNum; i = i + 1) begin
+      //     rf[i] <= `RegZero;
+      //   end
+      // endgenerate
+      rf[0] <= `RegZero;
+      rf[1] <= `RegZero;
+      rf[2] <= `RegZero;
+      rf[3] <= `RegZero;
+      rf[4] <= `RegZero;
+      rf[5] <= `RegZero;
+      rf[6] <= `RegZero;
+      rf[7] <= `RegZero;
+      rf[8] <= `RegZero;
+      rf[9] <= `RegZero;
+      rf[10] <= `RegZero;
+      rf[11] <= `RegZero;
+      rf[12] <= `RegZero;
+      rf[13] <= `RegZero;
+      rf[14] <= `RegZero;
+      rf[15] <= `RegZero;
+      rf[16] <= `RegZero;
+      rf[17] <= `RegZero;
+      rf[18] <= `RegZero;
+      rf[19] <= `RegZero;
+      rf[20] <= `RegZero;
+      rf[21] <= `RegZero;
+      rf[22] <= `RegZero;
+      rf[23] <= `RegZero;
+      rf[24] <= `RegZero;
+      rf[25] <= `RegZero;
+      rf[26] <= `RegZero;
+      rf[27] <= `RegZero;
+      rf[28] <= `RegZero;
+      rf[29] <= `RegZero;
+      rf[30] <= `RegZero;
+      rf[31] <= `RegZero;
     end else if (RdWriteEnable && RdWriteAddr != 0 && !ExcStopRegfile) begin                     //0号寄存器始终为0
       rf[RdWriteAddr] <= RdWriteData;
     end

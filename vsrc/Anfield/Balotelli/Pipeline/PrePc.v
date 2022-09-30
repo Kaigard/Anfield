@@ -2,14 +2,14 @@
  * @Author: Kai Zhou && zhouk9864@gmail.com
  * @Date: 2022-09-26 20:35:23
  * @LastEditors: Kai Zhou && zhouk9864@gmail.com
- * @LastEditTime: 2022-09-27 16:14:55
- * @FilePath: /Anfield/Balotelli/Pipeline/PrePc.v
+ * @LastEditTime: 2022-09-28 17:53:27
+ * @FilePath: /Anfield_SOC/vsrc/Anfield/Balotelli/Pipeline/PrePc.v
  * @Description: 该级为伪Pc级，对Bus的请求及地址从该级发出，取出的数据交给Ifu中的Cache，该级对Bus采取阻塞式读取，当Pc寻找Cache发生Missing时，进行地址跳转（跳转对跳转地址缓冲，从而实现对Bus阻塞读取）。
  * 
  * Copyright (c) 2022 by Kai Zhou zhouk9864@gmail.com, All Rights Reserved. 
  */
 
-
+`include "./vsrc/defines.v"
 //为了提高总线传输速率，设置伪Pc寄存器，该模块提供的Pc与流水线中的Pc并无完全对应关系，由Ifu模块进行指令-Pc的对应
 module PrePc (
   input Clk,
@@ -33,6 +33,7 @@ module PrePc (
   Reg #(`AddrRegWidth, `PcInit) Pc_reg (Clk, Rst, PcIn, PcOut, 1'b1);
   
   */
+  
   reg BusUsedHoldFlag;
   always @(posedge Clk) begin
     if(!Rst) begin

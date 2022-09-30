@@ -2,8 +2,8 @@
  * @Author: Kai Zhou && zhouk9864@gmail.com
  * @Date: 2022-09-26 20:35:23
  * @LastEditors: Kai Zhou && zhouk9864@gmail.com
- * @LastEditTime: 2022-09-27 16:10:49
- * @FilePath: /Anfield/Balotelli/Interface/AxiLiteMasterInterface.v
+ * @LastEditTime: 2022-09-28 11:28:20
+ * @FilePath: /Anfield_SOC/vsrc/Anfield/Balotelli/Interface/AxiLiteMasterInterface.v
  * @Description: 主机端接口，未进行完备的验证。
  * 
  * Copyright (c) 2022 by Kai Zhou zhouk9864@gmail.com, All Rights Reserved. 
@@ -19,7 +19,7 @@ module AxiLiteMasterInterface (
   input [`DataBus] WriteDataIn,
   input [3:0] WriteMask,
   output reg [`DataBus] ReadDataOut,
-  output ReadDataReady,
+  output reg ReadDataReady,
   output WriteDataOver,
   output ReadShakeHands,
   //global 
@@ -28,7 +28,7 @@ module AxiLiteMasterInterface (
   //write addr channel
   output reg AWVALID,
   output reg [`AddrBus] AWADDR,
-  output reg [2:0] AWPROT,
+  output [2:0] AWPROT,
   input AWREADY,
   //write data channel
   output reg WVALID,
@@ -42,7 +42,7 @@ module AxiLiteMasterInterface (
   //read addr channel
   output reg ARVALID,	   								      	                  // 接ReadEnable
   output reg [`AddrBus] ARADDR,
-  output reg [2:0] ARPROT,
+  output [2:0] ARPROT,
   input ARREADY,
   //read data channel
   input RVALID,
@@ -128,8 +128,8 @@ module AxiLiteMasterInterface (
           end
         end
         default : begin
-          AWVALID <= 1'x;
-          AWADDR <= 64'x;
+          AWVALID <= 1'b0;
+          AWADDR <= 64'b0;
         end
       endcase
     end
@@ -222,9 +222,9 @@ module AxiLiteMasterInterface (
           end
         end
         default : begin
-          WVALID <= 1'x;
-          WDATA <= 64'x;
-          WSTRB <= 4'hx;
+          WVALID <= 1'b0;
+          WDATA <= 64'b0;
+          WSTRB <= 4'b0;
         end
       endcase
     end
@@ -321,8 +321,8 @@ module AxiLiteMasterInterface (
           end 
         end
         default : begin
-          ARVALID <= 1'x;
-          ARADDR <= 64'x;
+          ARVALID <= 1'b0;
+          ARADDR <= 64'b0;
         end 
       endcase
     end 

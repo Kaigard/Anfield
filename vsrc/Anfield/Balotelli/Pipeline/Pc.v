@@ -2,13 +2,14 @@
  * @Author: Kai Zhou && zhouk9864@gmail.com
  * @Date: 2022-09-26 20:35:23
  * @LastEditors: Kai Zhou && zhouk9864@gmail.com
- * @LastEditTime: 2022-09-27 16:10:38
- * @FilePath: /Anfield/Balotelli/Pipeline/Pc.v
+ * @LastEditTime: 2022-09-28 10:03:19
+ * @FilePath: /Anfield_SOC/vsrc/Anfield/Balotelli/Pipeline/Pc.v
  * @Description: Pc寄存器，当前流水级需要的指令地址，当Cache Full时工作（阻塞式Cache）。
  * 
  * Copyright (c) 2022 by Kai Zhou zhouk9864@gmail.com, All Rights Reserved. 
  */
 
+`include "./vsrc/defines.v"
 module Pc (
   input Clk,
   input Rst,

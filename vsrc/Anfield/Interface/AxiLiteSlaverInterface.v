@@ -2,8 +2,8 @@
  * @Author: Kai Zhou && zhouk9864@gmail.com
  * @Date: 2022-09-26 20:35:23
  * @LastEditors: Kai Zhou && zhouk9864@gmail.com
- * @LastEditTime: 2022-09-27 16:11:17
- * @FilePath: /Anfield/Balotelli/Interface/AxiLiteSlaverInterface.v
+ * @LastEditTime: 2022-09-29 10:08:23
+ * @FilePath: /Anfield_SOC/vsrc/Anfield/Balotelli/Interface/AxiLiteSlaverInterface.v
  * @Description: 从机端接口。
  * 
  * Copyright (c) 2022 by Kai Zhou zhouk9864@gmail.com, All Rights Reserved. 
@@ -14,8 +14,10 @@ module AxiLiteSlaverInterface (
   //from ram or rom
   input [`DataBus] ReadDataIn,
   output reg [`AddrBus] ReadAddrOut,
+  output reg ReadEnableOut,
   output reg [`AddrBus] WriteAddrOut,
   output reg [`DataBus] WriteDataOut,
+  output reg WriteEnableOut,
   output reg [3 : 0] WriteStrb,
   input SlaverReadReady,
   input SlaverWriteReady,
@@ -71,10 +73,13 @@ module AxiLiteSlaverInterface (
   always @(posedge ACLK) begin
 	if(!ARESETn) begin
 	  WriteAddrOut <= `RegZero;
+	  WriteEnableOut <= 1'b0;
 	end else if(AWVALID && AWREADY) begin
 	  WriteAddrOut <= AWADDR;
+	  WriteEnableOut <= 1'b1;
 	end else begin
 	  WriteAddrOut <= `RegZero;
+	  WriteEnableOut <= 1'b0;
 	end
   end 
 
@@ -152,8 +157,8 @@ module AxiLiteSlaverInterface (
 		  end
 		end
 		default : begin
-		  BRESP <= 3'x;
-		  BVALID <= 1'x;
+		  BRESP <= 3'b0;
+		  BVALID <= 1'b0;
 		end
 	  endcase
 	end
@@ -174,10 +179,13 @@ module AxiLiteSlaverInterface (
   always @(posedge ACLK) begin
 	if(!ARESETn) begin
 	  ReadAddrOut <= `RegZero;
+	  ReadEnableOut <= 1'b0;
 	end else if(ARREADY && ARVALID) begin
 	  ReadAddrOut <= ARADDR;
+	  ReadEnableOut <= 1'b1;
 	end else begin
 	  ReadAddrOut <= `RegZero;
+	  ReadEnableOut <= 1'b0;
 	end
   end 
 
@@ -251,8 +259,8 @@ module AxiLiteSlaverInterface (
 		  end
 		end
 		default : begin
-		  RVALID <= 1'x;
-		  RDATA <= 64'x;
+		  RVALID <= 1'b0;
+		  RDATA <= 64'b0;
 		end
 	  endcase
 	end

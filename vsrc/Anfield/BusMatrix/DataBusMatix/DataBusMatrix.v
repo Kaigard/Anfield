@@ -2,8 +2,8 @@
  * @Author: Kai Zhou && zhouk9864@gmail.com
  * @Date: 2022-09-26 20:35:23
  * @LastEditors: Kai Zhou && zhouk9864@gmail.com
- * @LastEditTime: 2022-09-27 15:45:54
- * @FilePath: /Anfield/BusMatrix/DataBusMatrix.v
+ * @LastEditTime: 2022-09-29 11:00:14
+ * @FilePath: /Anfield_SOC/vsrc/Anfield/BusMatrix/DataBusMatix/DataBusMatrix.v
  * @Description: 总线矩阵，连接主机和从机。
  * 
  * Copyright (c) 2022 by Kai Zhou zhouk9864@gmail.com, All Rights Reserved. 
@@ -24,26 +24,32 @@ module DataBusMatrix (
   //slaver 0
   input [`DataBus] ReadDataIn_S0,
   output [`AddrBus] ReadAddrOut_S0,
+  output ReadEnableOut_S0,
   input RamReadReady_S0,
   input RamWriteReady_S0,
   output [`AddrBus] WriteAddrOut_S0,
   output [`DataBus] WriteDataOut_S0,
+  output WriteEnableOut_S0,
   output [3 : 0] WriteStrb_S0,
   //slaver 1
   input [`DataBus] ReadDataIn_S1,
   output [`AddrBus] ReadAddrOut_S1,
+  output ReadEnableOut_S1,
   input RamReadReady_S1,
   input RamWriteReady_S1,
   output [`AddrBus] WriteAddrOut_S1,
   output [`DataBus] WriteDataOut_S1,
+  output WriteEnableOut_S1,
   output [3 : 0] WriteStrb_S1,
   //slaver 2
   input [`DataBus] ReadDataIn_S2,
   output [`AddrBus] ReadAddrOut_S2,
+  output ReadEnableOut_S2,
   input RamReadReady_S2,
   input RamWriteReady_S2,
   output [`AddrBus] WriteAddrOut_S2,
   output [`DataBus] WriteDataOut_S2,
+  output WriteEnableOut_S2,
   output [3 : 0] WriteStrb_S2
 );
 
@@ -267,8 +273,10 @@ module DataBusMatrix (
   AxiLiteSlaverInterface Anfield_Axi_Lite_Slaver_Ram (
     .ReadDataIn(ReadDataIn_S0),
     .ReadAddrOut(ReadAddrOut_S0),
+    .ReadEnableOut(ReadEnableOut_S0),
     .WriteAddrOut(WriteAddrOut_S0),
     .WriteDataOut(WriteDataOut_S0),
+    .WriteEnableOut(WriteEnableOut_S0),
     .WriteStrb(WriteStrb_S0),
     .SlaverReadReady(RamReadReady_S0),
     .SlaverWriteReady(RamWriteReady_S0),
@@ -304,8 +312,10 @@ module DataBusMatrix (
   AxiLiteSlaverInterface Anfield_Axi_Lite_Slaver_Vga (
     .ReadDataIn(ReadDataIn_S1),
     .ReadAddrOut(ReadAddrOut_S1),
+    .ReadEnableOut(),
     .WriteAddrOut(WriteAddrOut_S1),
     .WriteDataOut(WriteDataOut_S1),
+    .WriteEnableOut(WriteEnableOut_S1),
     .WriteStrb(WriteStrb_S1),
     .SlaverReadReady(RamReadReady_S1),
     .SlaverWriteReady(RamWriteReady_S1),
@@ -341,8 +351,10 @@ module DataBusMatrix (
   AxiLiteSlaverInterface Anfield_Axi_Lite_Slaver_Timer0 (
     .ReadDataIn(ReadDataIn_S2),
     .ReadAddrOut(ReadAddrOut_S2),
+    .ReadEnableOut(),
     .WriteAddrOut(WriteAddrOut_S2),
     .WriteDataOut(WriteDataOut_S2),
+    .WriteEnableOut(WriteEnableOut_S2),
     .WriteStrb(WriteStrb_S2),
     .SlaverReadReady(RamReadReady_S2),
     .SlaverWriteReady(RamWriteReady_S2),

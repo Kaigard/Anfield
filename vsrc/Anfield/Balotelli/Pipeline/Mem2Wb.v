@@ -2,13 +2,14 @@
  * @Author: Kai Zhou && zhouk9864@gmail.com
  * @Date: 2022-09-26 20:35:23
  * @LastEditors: Kai Zhou && zhouk9864@gmail.com
- * @LastEditTime: 2022-09-27 16:05:08
- * @FilePath: /Anfield/Balotelli/Pipeline/Mem2Wb.v
+ * @LastEditTime: 2022-09-28 10:03:15
+ * @FilePath: /Anfield_SOC/vsrc/Anfield/Balotelli/Pipeline/Mem2Wb.v
  * @Description: 流水缓冲级。
  * 
  * Copyright (c) 2022 by Kai Zhou zhouk9864@gmail.com, All Rights Reserved. 
  */
 
+`include "./vsrc/defines.v"
 module Mem2Wb (
   input Clk,
   input Rst,

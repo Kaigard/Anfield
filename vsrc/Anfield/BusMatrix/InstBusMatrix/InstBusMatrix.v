@@ -2,8 +2,8 @@
  * @Author: Kai Zhou && zhouk9864@gmail.com
  * @Date: 2022-09-26 20:35:23
  * @LastEditors: Kai Zhou && zhouk9864@gmail.com
- * @LastEditTime: 2022-09-27 15:46:36
- * @FilePath: /Anfield/BusMatrix/InstBusMatrix.v
+ * @LastEditTime: 2022-09-29 13:33:09
+ * @FilePath: /Anfield_SOC/vsrc/Anfield/BusMatrix/InstBusMatrix/InstBusMatrix.v
  * @Description: 指令总线矩阵，连接主机和从机，仅有读功能。
  * 
  * Copyright (c) 2022 by Kai Zhou zhouk9864@gmail.com, All Rights Reserved. 
@@ -23,7 +23,8 @@ module InstBusMatrix (
   //slaver
   input [`DataBus] ReadDataIn,
   output [`AddrBus] ReadAddrOut,
-  output RomReady
+  output RomReady,
+  output ReadEnableOut
 );
 
 //   wire AWVALID;
@@ -57,6 +58,8 @@ module InstBusMatrix (
   //     InstAddrOut <= ReadAddrIn; 
   //   end
   // end
+
+  localparam RomBaseAddr = 64'h0000_0000_8000_0000;
 
   AxiLiteMasterInterface u_Axi_Lite_Master_Inst (
     .ReadEnableIn(BusRequest),
@@ -95,7 +98,9 @@ module InstBusMatrix (
   AxiLiteSlaverInterface u_Axi_Lite_Slaver_Inst (
     .ReadDataIn(ReadDataIn),
     .ReadAddrOut(ReadAddrOut),
+    .ReadEnableOut(ReadEnableOut),
     .WriteAddrOut(),
+    .WriteEnableOut(),
     .WriteDataOut(),
     .WriteStrb(),
     .SlaverReadReady(RomReady),
@@ -114,7 +119,8 @@ module InstBusMatrix (
     .BVALID(),
     .BRESP(),
     .ARVALID(ARVALID),
-    .ARADDR(ARADDR),
+    // Rom地址映射
+    .ARADDR(ARADDR - RomBaseAddr),
     .ARPROT(ARPROT),
     .ARREADY(ARREADY),
     .RVALID(RVALID),
