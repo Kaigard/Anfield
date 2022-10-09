@@ -18,6 +18,7 @@
 Log：  
 
 9.29 VGA接口模块测试通过 
+10.4 Anfield现已加入[RISC-V Exchange](https://riscv.org/exchange/?_sf_s=Anfield)
  
  
 
