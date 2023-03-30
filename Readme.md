@@ -8,6 +8,8 @@
  * 
  * Copyright (c) 2022 by Kai Zhou zhouk9864@gmail.com, All Rights Reserved. 
 -->
+## 重大版本优化即将推出！！！
+
 #### Anfield SoC
 <font color=red>注意！！！  
 此项目（V0.5）正在进行，必有Bug！！！  
